@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coastal Beacon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .header {
+            width: 100%;
+            text-align: center; 
+            background: linear-gradient(to right, #abeaf6, #f7f6c5);
+            padding: 40px 0;
+            font-size: 30px;
+            border-radius: 20px;
+        }
+        .header h1 { 
+            font-family: 'Lora', serif;
+            color: darkblue;
+        }
+        .header h5 {             
+            font-family: 'Poppins', sans-serif;
+            color: rgb(50, 113, 230);
+        }
+        .main {
+            background: linear-gradient(180deg, #f8f7b8, #fdffe0);
+            padding: 0px 15px;
+            position: absolute;
+            left: 600px;
+            top:365px;
+            margin-right: 8px;
+            border-radius: 20px;
+            width: 850px;            
+        }
+        .main h2 {
+            text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: #021b2d;
+            margin-top: 10px;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+        .main p{
+            text-align: center;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            padding:8px;
+        }
+        .icon {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: 40px;
+            left: 410px;
+            margin-bottom: 10px;
+        }
+        #image1{
+            position: absolute;
+            top: 367px;
+            width: 460px;
+            border-radius: 10px;
+            left: 60px;
+            height: 270px;
+        }
+        #image1:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .features-section {
+            position: absolute;
+            left: 200px;
+            top: 675px;
+            background: linear-gradient(180deg, #b8e9f8, #e0f7ff);
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 20px;
+            color: #033a5b;
+        }
+        .features-container h2 {
+            padding-top: 0px;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            font-family: "Quicksand", sans-serif;
+            color: #022c43;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+        .feature-card {
+            background: #ffffffcc;
+            border-radius: 20px;
+            padding: 20px;
+            width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: "Quicksand", sans-serif;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .feature-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.3rem;
+            color: #014b7a;
+        }
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #044a66;
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e6f7ff;
+            padding: 5px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+        .analytics-section {
+            position: absolute;
+            top: 1230px;
+            left: 100px;
+            width: 85%;
+            background: linear-gradient(180deg, #f3f5cd, #f7f7eb);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .analytics-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .analytics-text {
+            flex: 1;
+            min-width: 350px;
+        }
+        .analytics-text h2 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 2.2rem;
+            color: #003366;
+            margin-bottom: 15px;
+        }
+        .analytics-text p {
+            font-family: 'Poppins', sans-serif;
+            color: #044a66;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .analytics-image {
+            flex: 1;
+            text-align: center;
+        }
+        .analytics-image img {
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .analytics-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+        .map-section {
+            position: absolute;
+            top: 1900px;
+            left: 100px;
+            margin-top: 60px;
+            background: linear-gradient(180deg, #c2edfa, #e4f2f7);
+            padding: 60px 30px;
+            text-align: center;
+            border-radius: 20px;    
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+        .map-section h2 {
+            font-size: 2.2rem;
+            color: #024b7a;
+            font-family: 'Quicksand', sans-serif;
+            margin-bottom: 15px;
+        }
+        .map-desc {
+            font-size: 1.1rem;
+            color: #044a66;
+            font-family: 'Poppins', sans-serif;
+            width: 75%;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
+        .map-container {
+            display: flex;
+            justify-content: center;
+        }
+        .map-image1 {
+            width: 450px;
+            max-width: 900px;
+            border-radius: 20px;
+            margin-right: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .map-image1:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+        .map-image2 {
+            width: 450px;
+            max-width: 900px;
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .map-image2:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+        .footer {
+            background: linear-gradient(to right, #abeaf6, #f7f6c5);
+            color: #333738;
+            padding: 50px 30px 20px;
+            margin-top: 60px;
+            position: absolute;
+            top: 2650px;
+            width: 100%;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-contact{
+            margin-right:80px ;
+        }
+        .footer-about h3 {
+            margin-bottom: 10px;
+            margin-top: -10px;
+            font-size: 22px;
+            color: #303436;
+            font-family: "Poppins", sans-serif;
+        }
+        .footer-about p {
+            max-width: 800px;
+            font-size: 16px;
+            line-height: 1.6;
+            font-family: "Poppins", sans-serif;
+        }
+        .footer-contact p {
+            font-size: 16px;
+            margin: 6px 0;
+            font-family: "Poppins", sans-serif;
+        }
+        .footer-contact h4{
+            font-size: 22px;
+            margin-bottom: 10px;
+            margin-top: -10px;
+            font-family: "Poppins", sans-serif;
+        }
+        .media-icon {
+            width: 35px;
+            height: 35px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            padding: 5px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 2px solid rgba(0, 0, 0, 0.2);
+        }
+        .footer-bottom p {
+        font-size: 20px;
+        color: #000000;
+        margin-bottom: -5px;
+    }
+    </style>
+</head>
+<body>
+    <div class="header reveal">
+        <img src="images/beach.png" alt="Wave Icon" class="icon">
+        <h1>Coastal Beacon</h1>
+        <h5>Your smart guide to safe and sustainable coastal travel</h5>
+    </div>
+    <img class="reveal" src="images/image1.png" id="image1"/>
+    <div class="main reveal">
+        <h2 class="reveal">About</h2>
+        <p class="reveal">Coastal Beacon helps tourists explore Tamil Nadu's beaches safely and smartly. It provides real-time weather and sea updates using live data, classifying beaches as Suitable, Caution, or Not Suitable for visits. You can view beach conditions on an interactive map, check past weather trends, and get email alerts during unsafe conditions. Tourists can also share photos, feedback, and ratings to help others plan better. The platform also promotes sustainable tourism by encouraging visitors to stay aware of environmental conditions and choose responsible travel practices.
+        </p>
+    </div>
+    <section class="features-section reveal">
+        <div class="features-container reveal">
+            <h2 class="reveal">Our Key Features</h2>
+            <div class="feature-grid reveal">
+                <div class="feature-card reveal">
+                    <img src="images/waves.gif" alt="Wave Icon" class="feature-icon reveal">
+                    <h3>Real-Time Conditions</h3>
+                    <p>Get instant updates on sea temperature, tides, and weather patterns.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <img src="images/alert.gif" alt="Wave Icon" class="feature-icon reveal">
+                    <h3>Safety Alerts</h3>
+                    <p>Check whether the beach is suitable, caution or not suitable to visit.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <img src="images/map-location.gif" alt="Wave Icon" class="feature-icon reveal">
+                    <h3>Interactive Map</h3>
+                    <p>Explore beaches with color-coded safety indicators and details.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <img src="images/message.gif" alt="Wave Icon" class="feature-icon reveal">
+                    <h3>Email Notifications</h3>
+                    <p>Stay updated with alerts directly in your inbox anytime, anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="analytics-section reveal">
+        <div class="analytics-content">
+            <div class="analytics-text reveal">
+                <h2 class="reveal">Weather Trends & Safety Analytics</h2>
+                <p class="reveal">
+                    Coastal Beacon continuously monitors key parameters such as temperature, 
+                    humidity, wind speed, and pressure to evaluate current sea conditions. 
+                    By analyzing three-day weather trends, our system intelligently classifies 
+                    the beach's danger level 
+                    — helping tourists plan safe and enjoyable coastal visits.
+                </p>
+                <p class="reveal">
+                    The platform transforms raw weather data into clear visual insights, ensuring 
+                    you stay informed about the safety levels of your favorite beaches in real time.
+                </p>
+            </div>
+            <div class="analytics-image reveal">
+                <img src="images/Picture1.png" alt="Rameswaram Beach Analytics">
+            </div>
+        </div>
+    </section>
+    <section class="map-section reveal">
+        <h2 class="reveal">Interactive Coastal Map</h2>
+        <p class="map-desc reveal">
+            Explore Tamil Nadu’s coastline through our real-time interactive map. 
+            Each beach is informed with the weather conditions along with the top attractions, helping you make 
+            informed and confident travel decisions.
+        </p>
+        <div class="map-container reveal">
+            <img src="images/1.png" alt="Coastal Map Preview" class="map-image1">
+            <img src="images/2.png" alt="Coastal Map Preview" class="map-image2">
+        </div>
+    </section>
+    <footer class="footer reveal">
+        <div class="footer-content">
+            <div class="footer-about reveal">
+                <h3>Coastal Beacon</h3>
+                <p>Your smart coastal safety companion. Get real-time beach suitability updates, weather insights, and safety alerts 
+                    to enjoy Tamil Nadu’s beaches responsibly.</p>
+            </div>
+            <div class="footer-contact reveal">
+                <h4>Contact</h4>
+                <p><strong>Email:</strong> support@coastalbeacon.com</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <img src="images/a.png" alt="Whatsapp Icon" class="media-icon">
+                <img src="images/b.png" alt="X Icon" class="media-icon">
+                <img src="images/c.png" alt="Instagram Icon" class="media-icon">
+                <img src="images/d.png" alt="Facebook Icon" class="media-icon">
+                <img src="images/e.png" alt="Linkedin Icon" class="media-icon">
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Coastal Beacon — All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+<script>
+function revealOnScroll() {
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            el.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+</script>
+</html>
